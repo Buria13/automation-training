@@ -26,7 +26,7 @@ public class OptionalTaskDemo {
         String str = "{([[[(}[]({)]]))}{(])(})";
         System.out.println("\n   Правильность расстановок скобок: " + CollectionsManipulator.checkBrackets(str));
 
-        System.out.println("\n   Коллекция различных слов в файле: " +
+        System.out.println("\n   Коллекция различных слов в файле текущей дериктории resources/song.txt: " +
                 CollectionsManipulator.findDifferentWordsInFile("src/main/java/by/epam/learn/collections/optional/resources/song.txt"));
     }
 }
