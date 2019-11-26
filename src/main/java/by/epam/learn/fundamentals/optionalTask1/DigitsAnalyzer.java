@@ -7,6 +7,7 @@ public class DigitsAnalyzer {
     private static List<Integer>[] splitStringsIntoListsOfDigits(String[] arrOfStrings) {
         List<Integer>[] listsOfDigits = new ArrayList[arrOfStrings.length];
         char[][] digitsOnly = new char[arrOfStrings.length][];
+
         for(int i = 0; i < arrOfStrings.length; i++) {
             digitsOnly[i] = arrOfStrings[i].replaceAll("[^\\d]", "").toCharArray();
             listsOfDigits[i] = new ArrayList<>();
@@ -19,6 +20,7 @@ public class DigitsAnalyzer {
         List<Integer>[] arraysOfDigits = splitStringsIntoListsOfDigits(arr);
         int amountOfDifferentDigits = arr[0].length();
         int indexOfNecessaryElement = 0;
+
         for(int i = 0; i < arraysOfDigits.length; i++){
             Set<Integer> set = new HashSet<>(arraysOfDigits[i]);
             if(set.size() < amountOfDifferentDigits){
@@ -34,6 +36,7 @@ public class DigitsAnalyzer {
         List<Integer>[] arraysOfDigits = splitStringsIntoListsOfDigits(arr);
         int evenOnly = 0;
         int equalEvenOdd = 0;
+
         for (List<Integer> i : arraysOfDigits) {
             if(i.stream().allMatch(el -> el % 2 == 0)) evenOnly++;
             else {
@@ -50,6 +53,7 @@ public class DigitsAnalyzer {
         List<Integer>[] arraysOfDigits = splitStringsIntoListsOfDigits(arr);
         String resultMessage = "Нет числа со строгим порядком возрастания цифр";
         int i = 0;
+
         do {
             TreeSet<Integer> treeSet = new TreeSet<>(arraysOfDigits[i]);
             if(Arrays.deepEquals(treeSet.toArray(), arraysOfDigits[i].toArray())) {
@@ -65,6 +69,7 @@ public class DigitsAnalyzer {
         List<Integer>[] arraysOfDigits = splitStringsIntoListsOfDigits(arr);
         String resultMessage = "Нет числа, состоящего только из различных цифр";
         int i = 0;
+
         do {
             Set<Integer> set = new HashSet<>(arraysOfDigits[i]);
             if(set.size() == arraysOfDigits[i].size()) {
