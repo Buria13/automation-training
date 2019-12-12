@@ -53,15 +53,16 @@ public class TaxiPool {
     }
 
     public List<? extends Taxi> getCarsInSpeedRange(int minSpeed, int maxSpeed) {
-        List<? extends Taxi> tempCars = new ArrayList<>(cars);
-        Iterator<? extends Taxi> iterator = tempCars.iterator();
+        List<? extends Taxi> CarsInSpeedRange = new ArrayList<>(cars);
+        Iterator<? extends Taxi> iterator = CarsInSpeedRange.iterator();
+
         while (iterator.hasNext()) {
             Taxi car = iterator.next();
             if(car.getMaxSpeed() < minSpeed || car.getMaxSpeed() > maxSpeed) {
                 iterator.remove();
             }
         }
-        return tempCars;
+        return CarsInSpeedRange;
     }
 
     @Override
