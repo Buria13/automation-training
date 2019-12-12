@@ -22,14 +22,19 @@ public class NumbersLengthAnalyzer {
         sortArrayByElementLength(arr);
 
         System.out.println("Числа в порядке возрастания длины: ");
-        for(int i = 0; i < arr.length ; i++) System.out.print(arr[i] + "  ");
+        for(int i = 0; i < arr.length ; i++) {
+            System.out.print(arr[i] + "  ");
+        }
 
         System.out.println("\nЧисла в порядке убывания длины: ");
-        for(int i = arr.length-1; i >= 0 ; i--) System.out.print(arr[i] + "  ");
+        for(int i = arr.length-1; i >= 0 ; i--) {
+            System.out.print(arr[i] + "  ");
+        }
     }
 
     static void showAverageLengthOfNumbers(String arr[]) {
         int sum = 0;
+
         for(String i : arr) {
             sum += i.length();
         }

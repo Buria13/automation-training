@@ -7,6 +7,7 @@ public class Matrix {
     static double[][] createMatrix(int dimension, int range) {
         double[][] matrix = new double[dimension][dimension];
         Random random = new Random();
+
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
                 matrix[i][j] = random.nextDouble() * (2 * range + 1) - range;
@@ -42,6 +43,7 @@ public class Matrix {
 
     static double[][] reverseMatrix(double[][] matrix) {
         double[][] reversedMatrix = new double[matrix.length][matrix.length];
+
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
                 reversedMatrix[j][i] = matrix[i][j];
@@ -60,6 +62,7 @@ public class Matrix {
     private static ArrayList<Double> findIncreasingElements(double[][] matrix) {
         ArrayList<Double> increasingEls = new ArrayList<>();
         ArrayList<Double> tempList = new ArrayList<>();
+
         for(int i = 0; i < matrix.length; i++) {
             tempList.clear();
             for (int j = 0; j < matrix.length -1 ; j++) {
@@ -78,6 +81,7 @@ public class Matrix {
     private static ArrayList<Double> findDecreasingElements(double[][] matrix) {
         ArrayList<Double> decreasingEls = new ArrayList<>();
         ArrayList<Double> tempList = new ArrayList<>();
+
         for(int i = 0; i < matrix.length; i++) {
             tempList.clear();
             for (int j = 0; j < matrix.length -1 ; j++) {
