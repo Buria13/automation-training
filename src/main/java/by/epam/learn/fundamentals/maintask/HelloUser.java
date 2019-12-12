@@ -1,4 +1,4 @@
-package by.epam.learn.fundamentals;
+package by.epam.learn.fundamentals.maintask;
 
 import java.util.Scanner;
 

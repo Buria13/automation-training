@@ -1,4 +1,4 @@
-package by.epam.learn.fundamentals;
+package by.epam.learn.fundamentals.maintask;
 
 public class ArgumentsViceVersa {
     public static void main (String[] args){
