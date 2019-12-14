@@ -24,7 +24,7 @@ public class TaxiPoolDemo {
     );
 
     public static void main(String[] args) {
-        SaveCarsToFile(cars, "src/main/java/by/epam/learn/collections/main/resources/cars.dat");
+        saveCarsToFile(cars, "src/main/java/by/epam/learn/collections/main/resources/cars.dat");
         TaxiPool taxiPool = new TaxiPool("src/main/java/by/epam/learn/collections/main/resources/cars.dat");
 
         System.out.println("Стоимость автопарка: " +
@@ -35,7 +35,7 @@ public class TaxiPoolDemo {
                 taxiPool.sortByConsumption());
     }
 
-    private static void SaveCarsToFile(List<? extends Taxi> cars, String filePath) {
+    private static void saveCarsToFile(List<? extends Taxi> cars, String filePath) {
         try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream(filePath)
         )) {
