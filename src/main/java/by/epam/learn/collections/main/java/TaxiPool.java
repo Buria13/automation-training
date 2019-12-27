@@ -26,7 +26,7 @@ public class TaxiPool {
     private List<? extends Taxi> readFromFile(String filePath) {
         List<? extends Taxi> carsFromFile = new ArrayList<>();
 
-        try(ObjectInputStream objectInputStream = new ObjectInputStream(
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream(filePath)
         )) {
             carsFromFile = (List<? extends Taxi>) objectInputStream.readObject();
@@ -40,7 +40,7 @@ public class TaxiPool {
     public double getFullCost() {
         double fullCost = 0;
 
-        for(Taxi car : cars) {
+        for (Taxi car : cars) {
             fullCost += car.getCurrentCostValue();
         }
         return fullCost;
@@ -58,7 +58,7 @@ public class TaxiPool {
 
         while (iterator.hasNext()) {
             Taxi car = iterator.next();
-            if(car.getMaxSpeed() < minSpeed || car.getMaxSpeed() > maxSpeed) {
+            if (car.getMaxSpeed() < minSpeed || car.getMaxSpeed() > maxSpeed) {
                 iterator.remove();
             }
         }

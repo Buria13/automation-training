@@ -11,7 +11,8 @@ public class Options {
         in.nextLine();
         String[] numbers = new String[count];
         System.out.println("Теперь введите числа:\n");
-        for(int i = 0; i < count; i++) {
+
+        for (int i = 0; i < count; i++) {
             numbers[i] = in.nextLine();
         }
         return numbers;

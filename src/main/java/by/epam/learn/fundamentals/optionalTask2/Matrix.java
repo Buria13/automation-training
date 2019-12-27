@@ -17,15 +17,15 @@ public class Matrix {
     }
 
     static void showMatrix(double[][] matrix){
-        for(double[] i : matrix) {
-            for(double j : i) System.out.print(String.format("%9.2f", j));
+        for (double[] i : matrix) {
+            for (double j : i) System.out.print(String.format("%9.2f", j));
             System.out.println();
         }
     }
 
     static void showMatrix(ArrayList<ArrayList<Double>> matrixAsList) {
-        for(ArrayList<Double> i : matrixAsList) {
-            for(Double j : i) System.out.print(String.format("%9.2f", j));
+        for (ArrayList<Double> i : matrixAsList) {
+            for (Double j : i) System.out.print(String.format("%9.2f", j));
             System.out.println();
         }
     }
@@ -63,17 +63,17 @@ public class Matrix {
         ArrayList<Double> increasingEls = new ArrayList<>();
         ArrayList<Double> tempList = new ArrayList<>();
 
-        for(int i = 0; i < matrix.length; i++) {
+        for (int i = 0; i < matrix.length; i++) {
             tempList.clear();
             for (int j = 0; j < matrix.length -1 ; j++) {
-                if(tempList.isEmpty()) tempList.add(matrix[i][j]);
-                if((matrix[i][j] < matrix[i][j+1])) tempList.add(matrix[i][j+1]);
-                else if(tempList.size() > increasingEls.size()) {
+                if (tempList.isEmpty()) tempList.add(matrix[i][j]);
+                if ((matrix[i][j] < matrix[i][j+1])) tempList.add(matrix[i][j+1]);
+                else if (tempList.size() > increasingEls.size()) {
                     increasingEls = new ArrayList<>(tempList);
                     tempList.clear();
                 } else tempList.clear();
             }
-            if(tempList.size() > increasingEls.size()) increasingEls = new ArrayList<>(tempList);
+            if (tempList.size() > increasingEls.size()) increasingEls = new ArrayList<>(tempList);
         }
         return increasingEls;
     }
@@ -82,35 +82,37 @@ public class Matrix {
         ArrayList<Double> decreasingEls = new ArrayList<>();
         ArrayList<Double> tempList = new ArrayList<>();
 
-        for(int i = 0; i < matrix.length; i++) {
+        for (int i = 0; i < matrix.length; i++) {
             tempList.clear();
             for (int j = 0; j < matrix.length -1 ; j++) {
-                if(tempList.isEmpty()) tempList.add(matrix[i][j]);
-                if((matrix[i][j] > matrix[i][j+1])) tempList.add(matrix[i][j+1]);
-                else if(tempList.size() > decreasingEls.size()) {
+                if (tempList.isEmpty()) tempList.add(matrix[i][j]);
+                if ((matrix[i][j] > matrix[i][j+1])) tempList.add(matrix[i][j+1]);
+                else if (tempList.size() > decreasingEls.size()) {
                     decreasingEls = new ArrayList<>(tempList);
                     tempList.clear();
                 } else tempList.clear();
             }
-            if(tempList.size() > decreasingEls.size()) decreasingEls = new ArrayList<>(tempList);
+            if (tempList.size() > decreasingEls.size()) decreasingEls = new ArrayList<>(tempList);
         }
         return decreasingEls;
     }
 
     static double findSumOfElements(double[][] matrix) {
         double sumOfElements = 0;
-        for(double[] row : matrix) {
+
+        for (double[] row : matrix) {
             int indexOfFirstPositive = -1;
             int indexOfSecondPositive = -1;
             int i = 0;
+
             do {
-                if(row[i] > 0) {
-                    if(indexOfFirstPositive < 0) indexOfFirstPositive = i;
+                if (row[i] > 0) {
+                    if (indexOfFirstPositive < 0) indexOfFirstPositive = i;
                     else indexOfSecondPositive = i;
                 }
                 i++;
             } while (indexOfSecondPositive < 0 && i < row.length);
-            if(indexOfSecondPositive > 0 && indexOfSecondPositive - indexOfFirstPositive > 1) {
+            if (indexOfSecondPositive > 0 && indexOfSecondPositive - indexOfFirstPositive > 1) {
                 for (int j = indexOfFirstPositive + 1; j < indexOfSecondPositive; j++) {
                     sumOfElements += row[j];
                 }
@@ -124,10 +126,12 @@ public class Matrix {
         // Преобразуем двумерный массив в двумерный ArrayList и одновременно ищем максимальный элемент матрицы
         ArrayList<ArrayList<Double>> matrixAsList = new ArrayList<>();
         double maxElement = Double.MIN_VALUE;
-        for(double[] row : matrix) {
+
+        for (double[] row : matrix) {
             ArrayList<Double> list = new ArrayList<>();
-            for(double el : row) {
-                if(maxElement < el) maxElement = el;
+
+            for (double el : row) {
+                if (maxElement < el) maxElement = el;
                 list.add(el);
             }
             matrixAsList.add(list);
@@ -137,18 +141,23 @@ public class Matrix {
         // и сохраняем все позиции этого элемента, для последующего удаления из столбцов
         Iterator<ArrayList<Double>> iteratorByRow = matrixAsList.iterator();
         TreeSet<Integer> indexList = new TreeSet<>();
-        while (iteratorByRow.hasNext()){
+
+        while (iteratorByRow.hasNext()) {
             ArrayList<Double> row = iteratorByRow.next();
-            if (row.indexOf(maxElement) >= 0){
+            if (row.indexOf(maxElement) >= 0) {
                 for (int i = 0; i < row.size(); i++) {
-                    if(row.get(i) == maxElement) indexList.add(i);
+                    if (row.get(i) == maxElement) {
+                        indexList.add(i);
+                    }
                 }
                 iteratorByRow.remove();
             }
         }
 
         for(ArrayList<Double> columnFromRow : matrixAsList){
-            for(int i : indexList.descendingSet()) columnFromRow.remove(i);
+            for (int i : indexList.descendingSet()) {
+                columnFromRow.remove(i);
+            }
         }
         return matrixAsList;
     }

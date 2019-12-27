@@ -8,10 +8,12 @@ public class DigitsAnalyzer {
         List<Integer>[] listsOfDigits = new ArrayList[arrOfStrings.length];
         char[][] digitsOnly = new char[arrOfStrings.length][];
 
-        for(int i = 0; i < arrOfStrings.length; i++) {
+        for (int i = 0; i < arrOfStrings.length; i++) {
             digitsOnly[i] = arrOfStrings[i].replaceAll("[^\\d]", "").toCharArray();
             listsOfDigits[i] = new ArrayList<>();
-            for(char j : digitsOnly[i]) listsOfDigits[i].add(Character.getNumericValue(j));
+            for (char j : digitsOnly[i]) {
+                listsOfDigits[i].add(Character.getNumericValue(j));
+            }
         }
         return listsOfDigits;
     }
@@ -21,9 +23,9 @@ public class DigitsAnalyzer {
         int amountOfDifferentDigits = arr[0].length();
         int indexOfNecessaryElement = 0;
 
-        for(int i = 0; i < arraysOfDigits.length; i++){
+        for (int i = 0; i < arraysOfDigits.length; i++) {
             Set<Integer> set = new HashSet<>(arraysOfDigits[i]);
-            if(set.size() < amountOfDifferentDigits){
+            if (set.size() < amountOfDifferentDigits) {
                 indexOfNecessaryElement = i;
                 amountOfDifferentDigits = set.size();
             }
@@ -32,13 +34,15 @@ public class DigitsAnalyzer {
                 + arr[indexOfNecessaryElement]);
     }
 
-    static void findEvenOddDigits(String[] arr){
+    static void findEvenOddDigits(String[] arr) {
         List<Integer>[] arraysOfDigits = splitStringsIntoListsOfDigits(arr);
         int evenOnly = 0;
         int equalEvenOdd = 0;
 
         for (List<Integer> i : arraysOfDigits) {
-            if(i.stream().allMatch(el -> el % 2 == 0)) evenOnly++;
+            if (i.stream().allMatch(el -> el % 2 == 0)) {
+                evenOnly++;
+            }
             else {
                 int initialAmountOfDigits = i.size();
                 i.removeIf(el -> el % 2 == 0);

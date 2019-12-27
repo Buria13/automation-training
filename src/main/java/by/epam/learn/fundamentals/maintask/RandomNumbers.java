@@ -12,14 +12,14 @@ public class RandomNumbers {
         rndNumbers = new double[count];
         System.out.println();
 
-        for(int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             rndNumbers[i] = (double) Math.round(100 * Math.random()) / 100;
             System.out.println(rndNumbers[i] + "  ");
         }
 
         System.out.println();
 
-        for(double j : rndNumbers) {
+        for (double j : rndNumbers) {
             System.out.print(j + "  ");
         }
     }

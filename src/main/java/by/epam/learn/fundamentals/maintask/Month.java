@@ -14,7 +14,9 @@ public class Month {
             if (month >= 1 && month <= 12) {
                 GregorianCalendar date = new GregorianCalendar(0, month, 0);
                 System.out.println(new SimpleDateFormat("MMMM").format(date.getTime()));
-            } else System.out.println("Число должно быть в рамках от 1 до 12");
+            } else {
+                System.out.println("Число должно быть в рамках от 1 до 12");
+            }
         } catch (NumberFormatException  e) {
             System.out.println("Ошибка ввода: " + e +
                     "\nВводимые данные должны быть целым числом от 1 до 12");

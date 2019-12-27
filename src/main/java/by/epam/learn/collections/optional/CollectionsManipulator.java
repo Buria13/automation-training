@@ -14,10 +14,10 @@ public class CollectionsManipulator {
         Deque<String> stackOfStrings = new ArrayDeque<>();
         String line;
 
-        try(BufferedReader bufferedReader = new BufferedReader(
+        try (BufferedReader bufferedReader = new BufferedReader(
                 new FileReader(filePath))
         ) {
-            while ((line = bufferedReader.readLine()) != null){
+            while ((line = bufferedReader.readLine()) != null) {
                 stackOfStrings.push(line);
             }
         } catch (IOException e) {
@@ -29,7 +29,7 @@ public class CollectionsManipulator {
     private static void writeStringsInFileFromStack(String filePath, Deque<String> deque) {
         String line;
 
-        try(BufferedWriter bufferedWriter = new BufferedWriter(
+        try (BufferedWriter bufferedWriter = new BufferedWriter(
                 new FileWriter(filePath))
         ) {
             while (!deque.isEmpty()) {
@@ -47,11 +47,11 @@ public class CollectionsManipulator {
         Deque<Integer> stackOfDigits = new ArrayDeque<>();
         char[] digitsOnly = number.replaceAll("[^\\d]", "").toCharArray();
 
-        for(char i : digitsOnly) {
+        for (char i : digitsOnly) {
             stackOfDigits.push(Character.getNumericValue(i));
         }
 
-        for(int j : stackOfDigits) {
+        for (int j : stackOfDigits) {
             System.out.print(j);
         }
     }
@@ -60,7 +60,7 @@ public class CollectionsManipulator {
         List<String> listOfStrings = new ArrayList<>(readStringsFromFileToStack(filePath));
         listOfStrings.sort((o1, o2) -> o1.length() - o2.length());
 
-        for(String i : listOfStrings) {
+        for (String i : listOfStrings) {
             System.out.println(i);
         }
     }
@@ -69,7 +69,7 @@ public class CollectionsManipulator {
         List<String> listOfStrings = new ArrayList<>(readStringsFromFileToStack(filePath));
         Collections.sort(listOfStrings);
 
-        for(String i : listOfStrings) {
+        for (String i : listOfStrings) {
             System.out.println(i);
         }
     }
@@ -78,10 +78,10 @@ public class CollectionsManipulator {
         Deque<Character> brackets = new ArrayDeque<>();
         char[] chars = str.toCharArray();
 
-        for(char i : chars) {
-            if(i == '(' || i == '{' || i == '[') {
+        for (char i : chars) {
+            if (i == '(' || i == '{' || i == '[') {
                 addBracketToDeque(brackets, i);
-            } else if(!brackets.remove(i)) {
+            } else if (!brackets.remove(i)) {
                 return false;
             }
         }
@@ -89,7 +89,7 @@ public class CollectionsManipulator {
     }
 
     private static void addBracketToDeque(Deque<Character> deque, char bracket) {
-        if(bracket == '(') {
+        if (bracket == '(') {
             deque.push(')');
         } else {
             deque.push((char) (bracket + 2));
@@ -100,7 +100,7 @@ public class CollectionsManipulator {
         List<String> listOfStrings = new ArrayList<>(readStringsFromFileToStack(filePath));
         Set<String> setOfWords = new HashSet<>();
 
-        for(String str : listOfStrings) {
+        for (String str : listOfStrings) {
             setOfWords.addAll(Arrays.asList(str.toLowerCase().split(" ")));
         }
         return setOfWords;

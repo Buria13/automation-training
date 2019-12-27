@@ -36,7 +36,7 @@ public class TaxiPoolDemo {
     }
 
     private static void saveCarsToFile(List<? extends Taxi> cars, String filePath) {
-        try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream(filePath)
         )) {
             objectOutputStream.writeObject(cars);
