@@ -1,36 +1,31 @@
 package by.epam.learn.classes;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Library {
-    private Book[] books;
+    private List<Book> books;
 
     public Library(Book book) {
-        books = new Book[]{book};
+        books.add(book);
     }
 
     public Library(Book[] books) {
-        this.books = books.clone();
+        this.books = new ArrayList<>(Arrays.asList(books));
     }
 
-    public Book[] getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
 
     public void addBooks(Book book) {
-        books = addExemplar(book);
+        books.add(book);
     }
 
     public void addBooks(Book[] books) {
-        for (Book book : books) {
-            this.books = addExemplar(book);
-        }
-    }
-
-    private Book[] addExemplar(Book book) {
-        books = Arrays.copyOf(books, books.length + 1);
-        books[books.length - 1] = book;
-        return books;
+        Collections.addAll(this.books, books);
     }
 
     public void showSpecificAuthor(String author) {
