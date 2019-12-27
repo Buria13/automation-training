@@ -9,7 +9,7 @@ public class Book {
     private int year;
     private int pages;
     private double price;
-    private String binding;
+    private Binding binding;
 
     public Book(String t, String a) {
         this.id = ++countId;
@@ -18,7 +18,7 @@ public class Book {
     }
 
     public Book(String title, String author, String publisher,
-         int year, int pages, double price, String binding) {
+            int year, int pages, double price, Binding binding) {
         this.id = ++countId;
         this.title = title;
         this.author = author;
@@ -85,11 +85,11 @@ public class Book {
         this.price = price;
     }
 
-    public String getBinding() {
+    public Binding getBinding() {
         return binding;
     }
 
-    public void setBinding(String binding) {
+    public void setBinding(Binding binding) {
         this.binding = binding;
     }
 }
