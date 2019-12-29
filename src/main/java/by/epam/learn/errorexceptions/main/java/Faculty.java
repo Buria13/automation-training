@@ -28,6 +28,29 @@ public class Faculty {
         groups.add(group);
     }
 
+    public Group getGroupById(int groupId) {
+        for (Group group : groups) {
+            if (group.getGroupId() == groupId) {
+                return group;
+            }
+        }
+        return null;
+    }
+
+    public Student getStudentById(int studentId) {
+        for (Group group : groups) {
+            group.getStudentById(studentId);
+        }
+        return null;
+    }
+
+    public Student getStudentByName(String studentName) {
+        for (Group group : groups) {
+            group.getStudentByName(studentName);
+        }
+        return null;
+    }
+
 
     @Override
     public String toString() {

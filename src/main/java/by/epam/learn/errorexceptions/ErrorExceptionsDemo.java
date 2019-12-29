@@ -44,8 +44,18 @@ public class ErrorExceptionsDemo {
                 fksis
         ));
 
+        Subject mathematics = new Subject(SubjectName.MATHEMATICS);
+        Student student = bguir.getGroupById(120404).getStudentByName("Burets");
+        mathematics.addSubjectToStudent(student);
+        mathematics.addGradeToStudent(student, 9);
+        mathematics.addGradeToStudent(student, 3);
+        mathematics.addGradeToStudent(student, 7);
+        System.out.println(mathematics.getGradesOfSpecifyStudent(student));
+
+
+
         //System.out.println(bguir.getFaculties());
 
-        System.out.println(bguir.getGroupById(120404).getStudentByName("Burets"));
+        //System.out.println(bguir.getGroupById(120404).getStudentByName("Burets"));
     }
 }

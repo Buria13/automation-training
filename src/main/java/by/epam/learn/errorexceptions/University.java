@@ -24,6 +24,20 @@ public class University {
         return mapOfGroups.get(groupId);
     }
 
+    public Student getStudentById(int studentId) {
+        for (Faculty faculty : faculties) {
+            faculty.getStudentById(studentId);
+        }
+        return null;
+    }
+
+    public Student getStudentByName(String studentName) {
+        for (Faculty faculty : faculties) {
+            faculty.getStudentByName(studentName);
+        }
+        return null;
+    }
+
     private void addGroupsToMap(List<Faculty> faculties) {
         mapOfGroups = new HashMap<>();
 
