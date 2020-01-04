@@ -1,6 +1,7 @@
 package by.epam.learn.errorexceptions;
 
 import by.epam.learn.errorexceptions.main.java.*;
+import by.epam.learn.errorexceptions.main.java.structure.SubjectName;
 
 
 import java.util.HashMap;
@@ -10,10 +11,21 @@ import java.util.Map;
 public class University {
     private List<Faculty> faculties;
     private Map<Integer, Group> mapOfGroups;
+    private List<Subject> listOfSubjects;
 
-    public University(List<Faculty> faculties) {
+    public University(List<Faculty> faculties, List<Subject> listOfSubjects) {
         this.faculties = faculties;
+        this.listOfSubjects = listOfSubjects;
         addGroupsToMap(faculties);
+    }
+
+    public Subject getSubject(SubjectName subjectName) {
+        for (Subject subject : listOfSubjects) {
+            if (subject.getSubjectName() == subjectName) {
+                return subject;
+            }
+        }
+        return null;
     }
 
     public List<Faculty> getFaculties() {

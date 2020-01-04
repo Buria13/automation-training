@@ -35,8 +35,8 @@ public class Student {
         grades.put(subjectName, new ArrayList<>());
     }
 
-    public void addGradeToStudent(SubjectName subjectName, List<Integer> newGrades) {
-        grades.put(subjectName, newGrades);
+    public void addGradeToStudent(SubjectName subjectName, int grade) {
+        grades.get(subjectName).add(grade);
     }
 
     public double getAverageGrade() {

@@ -16,7 +16,9 @@ public class Subject {
         mapOfStudents = new HashMap<>();
     }
 
-
+    public SubjectName getSubjectName() {
+        return subjectName;
+    }
 
     public void addSubjectToFaculty(Faculty faculty) {
         for (Group group : faculty.getGroups()) {
@@ -38,11 +40,8 @@ public class Subject {
     }
 
     public void addGradeToStudent(Student student, int grade) {
-        List<Integer> newGrades = mapOfStudents.get(student);
-        newGrades.add(grade);
-        mapOfStudents.put(student, newGrades);
-
-        student.addGradeToStudent(subjectName, newGrades);
+        mapOfStudents.get(student).add(grade);
+        student.addGradeToStudent(subjectName, grade);
     }
 
     public List<Integer> getGradesOfSpecificStudent(Student student) {

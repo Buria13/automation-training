@@ -35,11 +35,6 @@ public class ErrorExceptionsDemo {
         Faculty fksis = new Faculty(FacultyName.FKSiS, new Group(110601, listOfStudents.subList(6, 9)));
         fksis.addGroup(new Group(110602, listOfStudents.subList(9, 12)));
 
-        University bguir = new University(Arrays.asList(
-                fitu,
-                fksis
-        ));
-
         List<Subject> listOfSubjects = new ArrayList<>(Arrays.asList(
                 new Subject(SubjectName.MATHEMATICS),
                 new Subject(SubjectName.PHYSICS),
@@ -47,6 +42,12 @@ public class ErrorExceptionsDemo {
                 new Subject(SubjectName.PHILOSOPHY)
         ));
 
+        University bguir = new University(Arrays.asList(
+                fitu,
+                fksis
+        ), listOfSubjects);
+
+        // Добавляем на факультеты случайные предметы и ставим случайные оценки студентам
         for (Subject subject : listOfSubjects) {
             for (Faculty faculty : bguir.getFaculties()) {
                 if (Math.random() > 0.5) {
@@ -56,12 +57,16 @@ public class ErrorExceptionsDemo {
             }
         }
 
+        Subject mathematics = bguir.getSubject(SubjectName.MATHEMATICS);
+
         Student student = bguir.getStudentByName("Burets");
+
         System.out.println(student.getGrades());
         System.out.println();
-        System.out.println(student.getAverageGrade());
+        System.out.println("Средняя оценка студента: " + student.getAverageGrade());
 
     }
+
 
     private static void setRandomGradesToStudents(Faculty faculty, Subject subject) {
         for (Group group : faculty.getGroups()) {
@@ -73,4 +78,5 @@ public class ErrorExceptionsDemo {
             }
         }
     }
+
 }
