@@ -26,14 +26,17 @@ public class University {
 
     public Student getStudentById(int studentId) {
         for (Faculty faculty : faculties) {
-            faculty.getStudentById(studentId);
+            Student student = faculty.getStudentById(studentId);
+            if (student != null) return student;
         }
         return null;
     }
 
     public Student getStudentByName(String studentName) {
         for (Faculty faculty : faculties) {
-            faculty.getStudentByName(studentName);
+            Student student = faculty.getStudentByName(studentName);
+            if (student != null) return student;
+
         }
         return null;
     }

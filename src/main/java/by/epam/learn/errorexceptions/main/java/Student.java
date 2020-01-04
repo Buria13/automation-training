@@ -1,16 +1,22 @@
 package by.epam.learn.errorexceptions.main.java;
 
+import by.epam.learn.errorexceptions.main.java.structure.SubjectName;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Student {
     private static int countId = 0;
     private int studentId;
     private String name;
-    private List<Subject> subjects;
+    private Map<SubjectName, List<Integer>> grades;
 
     public Student(String name) {
         this.studentId = ++countId;
         this.name = name;
+        this.grades = new HashMap<>();
     }
 
     public int getStudentId() {
@@ -21,10 +27,17 @@ public class Student {
         return name;
     }
 
-    public List<Subject> getSubjects() {
-        return subjects;
+    public Map<SubjectName, List<Integer>> getGrades() {
+        return grades;
     }
 
+    public void addSubjectToStudent(SubjectName subjectName) {
+        grades.put(subjectName, new ArrayList<>());
+    }
+
+    public void addGradeToStudent(SubjectName subjectName, List<Integer> newGrades) {
+        grades.put(subjectName, newGrades);
+    }
 
     @Override
     public String toString() {

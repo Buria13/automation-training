@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Faculty {
-    private List<Group> groups;
     private FacultyName facultyName;
+    private List<Group> groups;
 
     public Faculty(FacultyName facultyName, List<Group> groups) {
         this.facultyName = facultyName;
@@ -39,14 +39,16 @@ public class Faculty {
 
     public Student getStudentById(int studentId) {
         for (Group group : groups) {
-            group.getStudentById(studentId);
+            Student student = group.getStudentById(studentId);
+            if (student != null) return student;
         }
         return null;
     }
 
     public Student getStudentByName(String studentName) {
         for (Group group : groups) {
-            group.getStudentByName(studentName);
+            Student student = group.getStudentByName(studentName);
+            if (student != null) return student;
         }
         return null;
     }

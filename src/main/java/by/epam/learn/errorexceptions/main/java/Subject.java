@@ -9,29 +9,42 @@ import java.util.Map;
 
 public class Subject {
     private SubjectName subjectName;
-    private Map<Student, List<Integer>> grades;
+    private Map<Student, List<Integer>> mapOfStudents;
 
     public Subject(SubjectName subjectName) {
         this.subjectName = subjectName;
-        grades = new HashMap<>();
+        mapOfStudents = new HashMap<>();
     }
 
-    public void addSubjectToStudent(Student student) {
-        grades.put(student, new ArrayList<>());
+    public void addStudentToMapOfStudents(Student student) {
+        mapOfStudents.put(student, new ArrayList<>());
+
+        student.addSubjectToStudent(subjectName);
     }
 
-    public void addSubjectToGroup(Group group) {
-
+    public void addFacultyToMapOfStudents(Faculty faculty) {
+        for (Group group : faculty.getGroups()) {
+            addGroupToMapOfStudents(group);
+        }
     }
 
-    public List<Integer> getGradesOfSpecifyStudent(Student student) {
-        return grades.get(student);
+    public void addGroupToMapOfStudents(Group group) {
+        for (Student student : group.getStudents()) {
+            addStudentToMapOfStudents(student);
+            student.addSubjectToStudent(subjectName);
+        }
     }
 
     public void addGradeToStudent(Student student, int grade) {
-        List<Integer> newGrades = grades.get(student);
+        List<Integer> newGrades = mapOfStudents.get(student);
         newGrades.add(grade);
-        grades.put(student, newGrades);
+        mapOfStudents.put(student, newGrades);
+
+        student.addGradeToStudent(subjectName, newGrades);
+    }
+
+    public List<Integer> getGradesOfSpecificStudent(Student student) {
+        return mapOfStudents.get(student);
     }
 
 
