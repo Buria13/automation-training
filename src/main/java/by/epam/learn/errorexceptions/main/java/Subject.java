@@ -16,23 +16,25 @@ public class Subject {
         mapOfStudents = new HashMap<>();
     }
 
-    public void addStudentToMapOfStudents(Student student) {
-        mapOfStudents.put(student, new ArrayList<>());
 
-        student.addSubjectToStudent(subjectName);
-    }
 
-    public void addFacultyToMapOfStudents(Faculty faculty) {
+    public void addSubjectToFaculty(Faculty faculty) {
         for (Group group : faculty.getGroups()) {
-            addGroupToMapOfStudents(group);
+            addSubjectToGroup(group);
         }
     }
 
-    public void addGroupToMapOfStudents(Group group) {
+    public void addSubjectToGroup(Group group) {
         for (Student student : group.getStudents()) {
             addStudentToMapOfStudents(student);
             student.addSubjectToStudent(subjectName);
         }
+    }
+
+    private void addStudentToMapOfStudents(Student student) {
+        mapOfStudents.put(student, new ArrayList<>());
+
+        student.addSubjectToStudent(subjectName);
     }
 
     public void addGradeToStudent(Student student, int grade) {

@@ -3,6 +3,7 @@ package by.epam.learn.errorexceptions;
 import by.epam.learn.errorexceptions.main.java.*;
 import by.epam.learn.errorexceptions.main.java.structure.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,30 +40,37 @@ public class ErrorExceptionsDemo {
                 fksis
         ));
 
-        Subject mathematics = new Subject(SubjectName.MATHEMATICS);
-        Subject physics = new Subject(SubjectName.PHYSICS);
-        Subject programming = new Subject(SubjectName.PROGRAMMING);
-        Subject philosophy = new Subject(SubjectName.PHILOSOPHY);
+        List<Subject> listOfSubjects = new ArrayList<>(Arrays.asList(
+                new Subject(SubjectName.MATHEMATICS),
+                new Subject(SubjectName.PHYSICS),
+                new Subject(SubjectName.PROGRAMMING),
+                new Subject(SubjectName.PHILOSOPHY)
+        ));
 
-        Group group = fitu.getGroupById(120404);
-
-        physics.addFacultyToMapOfStudents(fitu);
+        for (Subject subject : listOfSubjects) {
+            for (Faculty faculty : bguir.getFaculties()) {
+                if (Math.random() > 0.5) {
+                    subject.addSubjectToFaculty(faculty);
+                    setRandomGradesToStudents(faculty, subject);
+                }
+            }
+        }
 
         Student student = bguir.getStudentByName("Burets");
-
-        mathematics.addStudentToMapOfStudents(student);
-        mathematics.addGradeToStudent(student, 9);
-        mathematics.addGradeToStudent(student, 3);
-        mathematics.addGradeToStudent(student, 7);
-        System.out.println(mathematics.getGradesOfSpecificStudent(student));
-        System.out.println();
         System.out.println(student.getGrades());
-
         System.out.println();
+        System.out.println(student.getAverageGrade());
 
+    }
 
-
-        //System.out.println(bguir.getFaculties());
-
+    private static void setRandomGradesToStudents(Faculty faculty, Subject subject) {
+        for (Group group : faculty.getGroups()) {
+            for (Student student : group.getStudents()) {
+                for (int i = 0; i < 10; i++) {
+                    int randomGrade = (int) (Math.random() * 9) + 2;
+                    subject.addGradeToStudent(student, randomGrade);
+                }
+            }
+        }
     }
 }

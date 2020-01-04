@@ -39,6 +39,19 @@ public class Student {
         grades.put(subjectName, newGrades);
     }
 
+    public double getAverageGrade() {
+        double averageGrades = 0;
+
+        for (Map.Entry<SubjectName, List<Integer>> subject : grades.entrySet()) {
+            averageGrades += (double) (subject.getValue().stream()
+                    .reduce((o1, o2) -> o1 + o2)
+                    .orElse(0))
+                    / subject.getValue().size();
+        }
+
+        return (double) Math.round((averageGrades / grades.size()) * 10) / 10;
+    }
+
     @Override
     public String toString() {
         return "\n    Student{" +
