@@ -35,7 +35,6 @@ public class Subject {
 
     private void addStudentToMapOfStudents(Student student) {
         mapOfStudents.put(student, new ArrayList<>());
-
         student.addSubjectToStudent(subjectName);
     }
 
@@ -44,9 +43,24 @@ public class Subject {
         student.addGradeToStudent(subjectName, grade);
     }
 
+    public double getAverageGradeOfStudent(Student student) {
+        double averageGrade = 0;
+        List<Integer> grades = mapOfStudents.get(student);
+
+        averageGrade += (double) (grades.stream()
+                .reduce((o1, o2) -> o1 + o2)
+                .orElse(null))
+                / grades.size();
+
+        return averageGrade;
+    }
+
+
     public List<Integer> getGradesOfSpecificStudent(Student student) {
         return mapOfStudents.get(student);
     }
+
+
 
 
 }
