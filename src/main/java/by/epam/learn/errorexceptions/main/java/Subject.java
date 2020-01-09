@@ -1,5 +1,8 @@
 package by.epam.learn.errorexceptions.main.java;
 
+import by.epam.learn.errorexceptions.main.java.exceptions.IllegalGradeException;
+import by.epam.learn.errorexceptions.main.java.exceptions.NoGroupInFacultyException;
+import by.epam.learn.errorexceptions.main.java.exceptions.NoStudentsInGroupException;
 import by.epam.learn.errorexceptions.main.java.structure.SubjectName;
 
 import java.util.ArrayList;
@@ -25,19 +28,30 @@ public class Subject {
     }
 
     public void addSubjectToFaculty(Faculty faculty) {
-        for (Group group : faculty.getGroups()) {
-            addSubjectToGroup(group);
+        try {
+            for (Group group : faculty.getGroups()) {
+                addSubjectToGroup(group);
+            }
+        } catch (NoGroupInFacultyException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     public void addSubjectToGroup(Group group) {
-        for (Student student : group.getStudents()) {
-            studentsMap.put(student, new ArrayList<>());
-            student.addSubjectToStudent(subjectName);
+        try {
+            for (Student student : group.getStudents()) {
+                studentsMap.put(student, new ArrayList<>());
+                student.addSubjectToStudent(subjectName);
+            }
+        } catch (NoStudentsInGroupException e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    public void addGradeToStudent(Student student, int grade) {
+    public void addGradeToStudent(Student student, int grade) throws IllegalGradeException {
+        if (grade < 1 || grade > 10) {
+            throw new IllegalGradeException("Оценка должна быть в границах от 1 до 10");
+        }
         studentsMap.get(student).add(grade);
     }
 

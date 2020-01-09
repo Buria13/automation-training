@@ -1,5 +1,7 @@
 package by.epam.learn.errorexceptions.main.java;
 
+import by.epam.learn.errorexceptions.main.java.exceptions.NoStudentsInGroupException;
+
 import java.util.List;
 
 public class Group {
@@ -33,7 +35,10 @@ public class Group {
         return null;
     }
 
-    public List<Student> getStudents() {
+    public List<Student> getStudents() throws NoStudentsInGroupException{
+        if (students.size() <= 1) {
+            throw new NoStudentsInGroupException("Отсутствие студентов в группе");
+        }
         return students;
     }
 

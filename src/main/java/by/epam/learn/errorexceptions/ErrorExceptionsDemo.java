@@ -1,6 +1,7 @@
 package by.epam.learn.errorexceptions;
 
 import by.epam.learn.errorexceptions.main.java.*;
+import by.epam.learn.errorexceptions.main.java.exceptions.*;
 import by.epam.learn.errorexceptions.main.java.structure.*;
 
 import java.util.ArrayList;
@@ -49,9 +50,13 @@ public class ErrorExceptionsDemo {
 
         // Добавляем предметы на факультеты и ставим случайные оценки студентам
         for (Subject subject : listOfSubjects) {
-            for (Faculty faculty : bguir.getFaculties()) {
-                subject.addSubjectToFaculty(faculty);
-                setRandomGradesToStudents(faculty, subject);
+            try {
+                for (Faculty faculty : bguir.getFaculties()) {
+                    subject.addSubjectToFaculty(faculty);
+                    setRandomGradesToStudents(faculty, subject);
+                }
+            } catch (NoFacultyInUniversityException e) {
+                System.out.println(e.getMessage());
             }
         }
 
@@ -60,9 +65,13 @@ public class ErrorExceptionsDemo {
         Subject subject = bguir.getSubject(SubjectName.MATHEMATICS);
 
         System.out.println(student);
-        for (SubjectName subjectName : student.getListOfSubjects()) {
-            System.out.println(subjectName + ": "
-                    + bguir.getSubject(subjectName).getGradesOfSpecificStudent(student));
+        try {
+            for (SubjectName subjectName : student.getListOfSubjects()) {
+                System.out.println(subjectName + ": "
+                        + bguir.getSubject(subjectName).getGradesOfSpecificStudent(student));
+            }
+        } catch (NoSubjectForStudentException e) {
+            e.printStackTrace();
         }
 
         System.out.println("\nСредняя балл студента по всем предметам: "
@@ -81,13 +90,23 @@ public class ErrorExceptionsDemo {
 
 
     private static void setRandomGradesToStudents(Faculty faculty, Subject subject) {
-        for (Group group : faculty.getGroups()) {
-            for (Student student : group.getStudents()) {
-                for (int i = 0; i < 10; i++) {
-                    int randomGrade = (int) (Math.random() * 9) + 2;
-                    subject.addGradeToStudent(student, randomGrade);
+
+        try {
+            for (Group group : faculty.getGroups()) {
+                for (Student student : group.getStudents()) {
+                    for (int i = 0; i < 10; i++) {
+                        int randomGrade = (int) (Math.random() * 9) + 2;
+
+                        try {
+                            subject.addGradeToStudent(student, randomGrade);
+                        } catch (IllegalGradeException e) {
+                            System.out.println("Невозможно добавить оценку. " + e.getMessage());
+                        }
+                    }
                 }
             }
+        } catch (NoGroupInFacultyException | NoStudentsInGroupException e) {
+            System.out.println(e.getMessage());
         }
     }
 

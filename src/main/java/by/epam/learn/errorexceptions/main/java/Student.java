@@ -1,5 +1,6 @@
 package by.epam.learn.errorexceptions.main.java;
 
+import by.epam.learn.errorexceptions.main.java.exceptions.NoSubjectForStudentException;
 import by.epam.learn.errorexceptions.main.java.structure.SubjectName;
 
 import java.util.ArrayList;
@@ -27,7 +28,10 @@ public class Student {
         return name;
     }
 
-    public List<SubjectName> getListOfSubjects() {
+    public List<SubjectName> getListOfSubjects() throws NoSubjectForStudentException{
+        if (listOfSubjects.size() == 0) {
+            throw new NoSubjectForStudentException("Отсутсвие предметов у студента");
+        }
         return listOfSubjects;
     }
 
