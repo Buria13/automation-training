@@ -11,12 +11,12 @@ public class Student {
     private static int countId = 0;
     private int studentId;
     private String name;
-    private Map<SubjectName, List<Integer>> grades;
+    private List<SubjectName> listOfSubjects;
 
     public Student(String name) {
         this.studentId = ++countId;
         this.name = name;
-        this.grades = new HashMap<>();
+        this.listOfSubjects = new ArrayList<>();
     }
 
     public int getStudentId() {
@@ -27,30 +27,14 @@ public class Student {
         return name;
     }
 
-    public Map<SubjectName, List<Integer>> getGrades() {
-        return grades;
+    public List<SubjectName> getListOfSubjects() {
+        return listOfSubjects;
     }
 
     public void addSubjectToStudent(SubjectName subjectName) {
-        grades.put(subjectName, new ArrayList<>());
+        listOfSubjects.add(subjectName);
     }
 
-    public void addGradeToStudent(SubjectName subjectName, int grade) {
-        grades.get(subjectName).add(grade);
-    }
-
-    public double getAverageGrade() {
-        double averageGrades = 0;
-
-        for (Map.Entry<SubjectName, List<Integer>> subject : grades.entrySet()) {
-            averageGrades += (double) (subject.getValue().stream()
-                    .reduce((o1, o2) -> o1 + o2)
-                    .orElse(0))
-                    / subject.getValue().size();
-        }
-
-        return (double) Math.round((averageGrades / grades.size()) * 10) / 10;
-    }
 
     @Override
     public String toString() {

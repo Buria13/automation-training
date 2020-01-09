@@ -47,23 +47,35 @@ public class ErrorExceptionsDemo {
                 fksis
         ), listOfSubjects);
 
-        // Добавляем на факультеты случайные предметы и ставим случайные оценки студентам
+        // Добавляем предметы на факультеты и ставим случайные оценки студентам
         for (Subject subject : listOfSubjects) {
             for (Faculty faculty : bguir.getFaculties()) {
-                if (Math.random() > 0.5) {
-                    subject.addSubjectToFaculty(faculty);
-                    setRandomGradesToStudents(faculty, subject);
-                }
+                subject.addSubjectToFaculty(faculty);
+                setRandomGradesToStudents(faculty, subject);
             }
         }
 
-        Subject mathematics = bguir.getSubject(SubjectName.MATHEMATICS);
-
+        Group group = bguir.getGroupById(120404);
         Student student = bguir.getStudentByName("Burets");
+        Subject subject = bguir.getSubject(SubjectName.MATHEMATICS);
 
-        System.out.println(student.getGrades());
-        System.out.println();
-        System.out.println("Средняя оценка студента: " + student.getAverageGrade());
+        System.out.println(student);
+        for (SubjectName subjectName : student.getListOfSubjects()) {
+            System.out.println(subjectName + ": "
+                    + bguir.getSubject(subjectName).getGradesOfSpecificStudent(student));
+        }
+
+        System.out.println("\nСредняя балл студента по всем предметам: "
+                + bguir.getAverageGradeOfStudentInAllSubjects(student));
+
+        System.out.println("\nСредний балл по конкретному предмету в конкретной группе: "
+                + bguir.getAverageGradeOfGroupInSpecificSubject(group, subject));
+
+        System.out.println("\nСредний балл по конкретному предмету на конкретном факультете: "
+                + bguir.getAverageGradeOfFacultyInSpecificSubject(fitu, subject));
+
+        System.out.println("\nСредний балл по предмету для всего университета: "
+                + bguir.getAverageGradeOfUniversityInSpecificSubject(subject));
 
     }
 

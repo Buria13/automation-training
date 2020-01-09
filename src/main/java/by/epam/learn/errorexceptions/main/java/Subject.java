@@ -9,15 +9,19 @@ import java.util.Map;
 
 public class Subject {
     private SubjectName subjectName;
-    private Map<Student, List<Integer>> mapOfStudents;
+    private Map<Student, List<Integer>> studentsMap;
 
     public Subject(SubjectName subjectName) {
         this.subjectName = subjectName;
-        mapOfStudents = new HashMap<>();
+        studentsMap = new HashMap<>();
     }
 
     public SubjectName getSubjectName() {
         return subjectName;
+    }
+
+    public Map<Student, List<Integer>> getStudentsMap() {
+        return studentsMap;
     }
 
     public void addSubjectToFaculty(Faculty faculty) {
@@ -28,24 +32,18 @@ public class Subject {
 
     public void addSubjectToGroup(Group group) {
         for (Student student : group.getStudents()) {
-            addStudentToMapOfStudents(student);
+            studentsMap.put(student, new ArrayList<>());
             student.addSubjectToStudent(subjectName);
         }
     }
 
-    private void addStudentToMapOfStudents(Student student) {
-        mapOfStudents.put(student, new ArrayList<>());
-        student.addSubjectToStudent(subjectName);
-    }
-
     public void addGradeToStudent(Student student, int grade) {
-        mapOfStudents.get(student).add(grade);
-        student.addGradeToStudent(subjectName, grade);
+        studentsMap.get(student).add(grade);
     }
 
     public double getAverageGradeOfStudent(Student student) {
         double averageGrade = 0;
-        List<Integer> grades = mapOfStudents.get(student);
+        List<Integer> grades = studentsMap.get(student);
 
         averageGrade += (double) (grades.stream()
                 .reduce((o1, o2) -> o1 + o2)
@@ -57,7 +55,7 @@ public class Subject {
 
 
     public List<Integer> getGradesOfSpecificStudent(Student student) {
-        return mapOfStudents.get(student);
+        return studentsMap.get(student);
     }
 
 
