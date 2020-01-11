@@ -64,9 +64,18 @@ public class ErrorExceptionsDemo {
         Student student = bguir.getStudentByName("Burets");
         Subject subject = bguir.getSubject(SubjectName.MATHEMATICS);
 
-        System.out.println(student);
+        System.out.println("Вывод для примера студент и список его оценок по предметам: "
+                + student);
+        try {
+            for (SubjectName subjectName : student.getListOfSubjects()) {
+                System.out.println(subjectName + " : "
+                         + bguir.getSubject(subjectName).getGradesOfSpecificStudent(student));
+            }
+        } catch (NoSubjectForStudentException e) {
+            System.out.println(e.getMessage());
+        }
 
-        System.out.println("\nСредняя балл студента по всем предметам: "
+        System.out.println("\nСредний балл студента по всем предметам: "
                 + bguir.getAverageGradeOfStudentInAllSubjects(student));
 
         System.out.println("\nСредний балл по конкретному предмету в конкретной группе: "

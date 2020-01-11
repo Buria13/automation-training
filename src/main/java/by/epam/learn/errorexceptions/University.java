@@ -11,6 +11,10 @@ public class University {
     private List<Faculty> faculties;
     private List<Subject> subjectsList;
 
+    public University(List<Faculty> faculties) {
+        this.faculties = faculties;
+    }
+
     public University(List<Faculty> faculties, List<Subject> listOfSubjects) {
         this.faculties = faculties;
         this.subjectsList = listOfSubjects;
@@ -121,7 +125,7 @@ public class University {
 
     public double getAverageGradeOfUniversityInSpecificSubject(Subject subject) {
         double averageGrades = 0;
-        Set<Student> studentList = subject.getStudentsMap().keySet();
+        Set<Student> studentList = subject.getStudentsGradesMap().keySet();
 
         for (Student student : studentList) {
             averageGrades += subject.getAverageGradeOfStudent(student);

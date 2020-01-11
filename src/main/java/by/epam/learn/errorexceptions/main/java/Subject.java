@@ -12,19 +12,23 @@ import java.util.Map;
 
 public class Subject {
     private SubjectName subjectName;
-    private Map<Student, List<Integer>> studentsMap;
+    private Map<Student, List<Integer>> studentsGradesMap;
 
     public Subject(SubjectName subjectName) {
         this.subjectName = subjectName;
-        studentsMap = new HashMap<>();
+        studentsGradesMap = new HashMap<>();
     }
 
     public SubjectName getSubjectName() {
         return subjectName;
     }
 
-    public Map<Student, List<Integer>> getStudentsMap() {
-        return studentsMap;
+    public Map<Student, List<Integer>> getStudentsGradesMap() {
+        return studentsGradesMap;
+    }
+
+    public List<Integer> getGradesOfSpecificStudent(Student student) {
+        return studentsGradesMap.get(student);
     }
 
     public void addSubjectToFaculty(Faculty faculty) {
@@ -40,7 +44,7 @@ public class Subject {
     public void addSubjectToGroup(Group group) {
         try {
             for (Student student : group.getStudents()) {
-                studentsMap.put(student, new ArrayList<>());
+                studentsGradesMap.put(student, new ArrayList<>());
                 student.addSubjectToStudent(subjectName);
             }
         } catch (NoStudentsInGroupException e) {
@@ -52,27 +56,19 @@ public class Subject {
         if (grade < 1 || grade > 10) {
             throw new IllegalGradeException("Оценка должна быть в границах от 1 до 10");
         }
-        studentsMap.get(student).add(grade);
+        studentsGradesMap.get(student).add(grade);
     }
 
     public double getAverageGradeOfStudent(Student student) {
         double averageGrade = 0;
-        List<Integer> grades = studentsMap.get(student);
+        List<Integer> grades = studentsGradesMap.get(student);
 
         averageGrade += (double) (grades.stream()
                 .reduce((o1, o2) -> o1 + o2)
-                .orElse(null))
+                .orElse(0))
                 / grades.size();
 
         return averageGrade;
     }
-
-
-    public List<Integer> getGradesOfSpecificStudent(Student student) {
-        return studentsMap.get(student);
-    }
-
-
-
 
 }
