@@ -30,7 +30,7 @@ public class University {
     }
 
     public List<Faculty> getFaculties() throws NoFacultyInUniversityException {
-        if (faculties.size() <= 1) {
+        if (faculties.isEmpty()) {
             throw new NoFacultyInUniversityException("Отсутствие факультетов в университете");
         }
         return faculties;

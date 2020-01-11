@@ -29,7 +29,7 @@ public class Student {
     }
 
     public List<SubjectName> getListOfSubjects() throws NoSubjectForStudentException{
-        if (listOfSubjects.size() == 0) {
+        if (listOfSubjects.isEmpty()) {
             throw new NoSubjectForStudentException("Отсутсвие предметов у студента");
         }
         return listOfSubjects;

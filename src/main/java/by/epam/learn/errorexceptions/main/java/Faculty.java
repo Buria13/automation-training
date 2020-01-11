@@ -22,7 +22,7 @@ public class Faculty {
     }
 
     public List<Group> getGroups() throws NoGroupInFacultyException {
-        if (groups.size() <= 0) {
+        if (groups.isEmpty()) {
             throw new NoGroupInFacultyException("Отсутствие групп на факультете");
         }
         return groups;
