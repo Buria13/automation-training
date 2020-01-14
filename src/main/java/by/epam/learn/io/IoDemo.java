@@ -9,15 +9,9 @@ public class IoDemo {
 
     public static void main(String[] args) {
         String str = args[0];
-
-        //String str = "d:\\com";
-       // String str = "src/main/java/by/epam/learn/io/resources/tree.txt";
-
         File file = new File(str);
 
         if (file.isDirectory()) {
-            System.out.println("Результат программы находиться " +
-                    "в текущей дериктории resources/tree.txt");
             tree(file);
         } else {
             tree(str);
@@ -50,6 +44,8 @@ public class IoDemo {
 
 
     private static void tree(File directory) {
+        System.out.println("Результат программы находиться " +
+                "в текущей дериктории resources/tree.txt");
         reassignSystemOutToFileOutputStream(directory);
     }
 
