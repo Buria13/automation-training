@@ -1,20 +1,23 @@
 package by.epam.learn.io;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IoDemo {
 
 
     public static void main(String[] args) {
+        String str = args[0];
+
         //String str = "d:\\com";
-        String str = "someString";
+       // String str = "src/main/java/by/epam/learn/io/resources/tree.txt";
+
         File file = new File(str);
-        //File file = new File(args[0]);
 
         if (file.isDirectory()) {
+            System.out.println("Результат программы находиться " +
+                    "в текущей дериктории resources/tree.txt");
             tree(file);
         } else {
             tree(str);
@@ -23,6 +26,26 @@ public class IoDemo {
 
     private static void tree(String str) {
         System.out.println("второй трее");
+        List<String> stringList = readStringsFromFileToList(str);
+        int folders = 0;
+        int files = 0;
+        double nameLengthOfFiles = 0;
+
+        for (String line : stringList) {
+            if (line.contains("|-----")) {
+                folders++;
+            } else {
+                files++;
+                nameLengthOfFiles += line.replaceAll("\\|", "").trim().length();
+            }
+        }
+
+        System.out.println("Количество папок: " + folders);
+        System.out.println("Количество файлов: " + files);
+        System.out.println("Среднее количество файлов в папке: "
+                + ((double) files) / folders);
+        System.out.println("Средняя длина названия файла: "
+                + nameLengthOfFiles / files);
     }
 
 
@@ -34,8 +57,10 @@ public class IoDemo {
         File tree = new File ("src/main/java/by/epam/learn/io/resources/tree.txt");
         try (PrintStream stream = new PrintStream(
                 new FileOutputStream(tree))) {
+
             System.setOut(stream);
             writeTreeToFile(directory, "");
+
         } catch (FileNotFoundException e) {
             System.out.println("Ошибка чтения файла");
         }
@@ -58,6 +83,24 @@ public class IoDemo {
                 }
             }
         }
+    }
+
+    private static List<String> readStringsFromFileToList(String filePath) {
+        List<String> stringsList = new ArrayList<>();
+        String line;
+
+        try (BufferedReader bufferedReader = new BufferedReader(
+                new FileReader(filePath))) {
+
+            while ((line = bufferedReader.readLine()) != null) {
+                stringsList.add(line);
+            }
+
+        } catch (IOException e) {
+            System.out.println("Ошибка чтения файла: " + e);
+        }
+
+        return stringsList;
     }
 }
 
